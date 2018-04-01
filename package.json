@@ -1,0 +1,22 @@
+{
+  "name": "prime-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dgraham90/Prime-Project.git"
+  },
+  "author": "Donald Graham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dgraham90/Prime-Project/issues"
+  },
+  "homepage": "https://github.com/dgraham90/Prime-Project#readme",
+  "devDependencies": {
+    "jasmine": "^3.1.0"
+  }
+}
