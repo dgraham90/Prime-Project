@@ -1,8 +1,11 @@
 describe("Unit Tests for prime number generation", function() { 
-    //Calculate a random number between 2 and 100
-    let arrayLength = Math.floor(Math.random() * 100) + 2;
-    let prime = new primes(arrayLength);
+    //Calculate a random number between 1 and 100
+    const arrayLength = Math.floor(Math.random() * 100) + 1;
+    let prime;
     beforeEach(function() {
+        //instantiate a new prime object before each test.
+        prime = new primes(arrayLength);
+
         //Add a matcher to test if a number is prime
         jasmine.addMatchers({
             toBePrime: function() {
@@ -27,7 +30,7 @@ describe("Unit Tests for prime number generation", function() {
     });          
 
     it("Prime Array isn't empty", function() {
-        expect(prime.primeArray.length).toBeGreaterThan(1);
+        expect(prime.primeArray.length).toBeGreaterThan(0);
     });
     it("Array length should be equal to input", function() {
         expect(prime.primeArray.length).toEqual(arrayLength);

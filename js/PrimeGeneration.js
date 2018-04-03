@@ -1,7 +1,6 @@
 function primes(length) {
-    this.Length = length;
-
-    this.isPrime = function(n) {
+    const Length = length;
+    const isPrime = function(n) {
         //n must be atleast 2
         if( n < 2) return false;
         // a number is prime if it is divisible only by 1 and itself
@@ -11,38 +10,43 @@ function primes(length) {
         }
         return true;
     };
-    this.createPrimeArray = function(start, end) {
+    const createPrimeArray = function(count, firstPrime) {
+        //If we only want one prime return an array only containing 2.
+        if (count == 1) return [2];
+
         primeArr = [];
-        //loop through the desired array length and check if a nubmer is prime, add it to the array if so.
-        for (let i=start; i < end; i++) {
-            if (this.isPrime(i))
-                primeArr.push(i);
-        }
+        //loop through the desired array length and calculate new primes until we reach the limit.
+            for (let i=firstPrime;primeArr.length < count;i++) {
+                if (isPrime(i)) {
+                    primeArr.push(i);
+                }
+            };
         return primeArr;
     };
-    this.GetPrimeArray = function() {
+    const GetPrimeArray = function() {
         //Check if we have already cached a list of primes, this so we can save time having to calculate them each time.
         if (localStorage.PrimeArray) {
             //if the cached prime array is not long enough re-use the existing array and only calculate new primes.
             let storedArray = localStorage.PrimeArray.split(",");
-            if (storedArray.length < this.Length) {
-                let arr = storedArray.join(this.createPrimeArray(storedArray.length + 1, this.Length));
+            if (storedArray.length < Length) {
+                //start creating new primes starting from the largest number stored in the array.
+                let arr = storedArray.concat(createPrimeArray(Length, parseInt(storedArray[storedArray.length -1]) + 1));
                 //Insert the newly extended prime array into the local storage.
-                this.storeArray(arr);
+                storeArray(arr);
                 return arr;
             } else {
                 //only return the required number of primes.
-                return storedArray.splice(0,this.Length);
+                return storedArray.splice(0,Length);
             }
         } else {
-            let arr = this.createPrimeArray(0, this.Length);
+            let arr = createPrimeArray(Length, 2);
             //Insert the newly created prime array into local storage.
-            this.storeArray(arr);
+            storeArray(arr);
             return arr;
         }
     };
-    this.storeArray = function(arr) {
+    const storeArray = function(arr) {
         localStorage.setItem("PrimeArray", arr);
     }
-    this.primeArray = this.GetPrimeArray();
+    this.primeArray = GetPrimeArray();
 };
