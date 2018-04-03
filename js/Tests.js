@@ -41,16 +41,42 @@ describe("Unit Tests for prime number generation", function() {
 });
 
 describe("Unit Tests for DOM", function() {
-    it("User input should be a whole number", function() {
+    const arrayLength = Math.floor(Math.random() * 100) + 1;
+    let build;
+    beforeAll(function() {
+        //Generate some dom elements we can use for testing.
+        let body = document.getElementsByTagName("body")[0];
+        let div = document.createElement("div");
+        let txtInput = document.createElement('input');
+        let tbl = document.createElement("table");
+        txtInput.setAttribute("type", "number");
+        txtInput.setAttribute("id", "txtInput");
+        tbl.setAttribute("id", "tblPrimes");
 
+        //Set the input value to the random number generated
+        txtInput.value = arrayLength;
+
+        
+        build = new BuildTable();
+        build.createTable(txtInput.value, tbl);
+
+        //append the created elements to the test page
+        div.appendChild(txtInput);
+        div.appendChild(tbl);
+        body.appendChild(div);
+      });
+
+
+    it("User input should be a whole number", function() {
+        expect(document.getElementById('txtInput').value % 1 === 0).toBe(true);
     });
     it("User input should be >= to 1", function() {
-
+        expect(document.getElementById('txtInput').value).toBeGreaterThan(0);
     });
-    it("Table generated n+1 wide and n+1 high", function() {
-
+    it("Table generated n+1 wide", function() {
+        expect(document.getElementById('tblPrimes').rows[0].cells.length).toBe(arrayLength+1);
     });
-    it("Generates table in less than 5 seconds", function() {
-
+    it("Table generated n+1 high", function() {
+        expect(document.getElementById('tblPrimes').rows.length).toBe(arrayLength+1);
     });
 });
