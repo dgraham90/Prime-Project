@@ -49,6 +49,7 @@ describe("Unit Tests for DOM", function() {
         let div = document.createElement("div");
         let txtInput = document.createElement('input');
         let tbl = document.createElement("table");
+        div.style.display = 'none';
         txtInput.setAttribute("type", "number");
         txtInput.setAttribute("id", "txtInput");
         tbl.setAttribute("id", "tblPrimes");
