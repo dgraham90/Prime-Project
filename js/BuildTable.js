@@ -1,8 +1,6 @@
 function BuildTable() {
-    this.createTable = function(len, tbl) { 
+    this.createTable = function(arr, tbl) { 
         let rows = [];
-        const arr = new primes(len).primeArray;
-
         for (let i=0; i< arr.length+1; i++) {
             let row = [];
             for (var j = 0; j < arr.length+1; j++) {

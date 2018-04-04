@@ -1,6 +1,6 @@
 describe("Unit Tests for prime number generation", function() { 
     //Calculate a random number between 1 and 100
-    const arrayLength = Math.floor(Math.random() * 100) + 1;
+    const arrayLength = Math.floor(Math.random() * 1000) + 1;
     let prime;
     beforeEach(function() {
         //instantiate a new prime object before each test.
