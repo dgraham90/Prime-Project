@@ -58,8 +58,11 @@ describe("Unit Tests for DOM", function() {
         txtInput.value = arrayLength;
 
         
-        build = new BuildTable();
-        build.createTable(txtInput.value, tbl);
+        new BuildTable().createTable(
+            new primes(
+                txtInput.value).primeArray, 
+                tbl
+            );
 
         //append the created elements to the test page
         div.appendChild(txtInput);
