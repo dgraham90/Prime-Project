@@ -1,5 +1,14 @@
 function primes(length) {
     const Length = length;
+    //local storage test for IE / Safari
+    const localStorageAvailable = function() {
+        try {
+            localStorage.getItem("PrimeArray")
+            return true;
+        } catch (exception) {
+            return false;
+        }
+    };
     const isPrime = function(n) {
         //n must be atleast 2
         if( n < 2) return false;
@@ -11,7 +20,7 @@ function primes(length) {
         return true;
     };
     const createPrimeArray = function(count, firstPrime) {
-        //If we only want one prime return an array only containing 2.
+        //If we only want one prime number return an array only containing 2.
         if (count == 1) return [2];
 
         primeArr = [];
@@ -24,8 +33,8 @@ function primes(length) {
         return primeArr;
     };
     const GetPrimeArray = function() {
-        //Check if we have already cached a list of primes, this so we can save time having to calculate them each time.
-        if (localStorage.PrimeArray) {
+        //Check if we have already cached a list of primes.
+        if (localStorageAvailable() && localStorage.PrimeArray) {
             //if the cached prime array is not long enough re-use the existing array and only calculate new primes.
             let storedArray = localStorage.PrimeArray.split(",");
             if (storedArray.length < Length) {
@@ -46,7 +55,8 @@ function primes(length) {
         }
     };
     const storeArray = function(arr) {
-        localStorage.setItem("PrimeArray", arr);
+        if (localStorageAvailable())
+            localStorage.setItem("PrimeArray", arr);
     }
     this.primeArray = GetPrimeArray();
 };
